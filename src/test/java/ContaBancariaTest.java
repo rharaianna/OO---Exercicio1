@@ -8,7 +8,7 @@ public class ContaBancariaTest {
     @Test
     void tiraMaisDoQueTem() {
         try {
-            ContaBancaria conta = new ContaBancaria();
+            ContaBancaria conta = new ContaBancaria("12345678");
             conta.depositar(99);
             conta.sacar(100);
             fail();
@@ -19,9 +19,17 @@ public class ContaBancariaTest {
     }
 
     @Test
+    void tiraIgualDoQueTem() {
+            ContaBancaria conta = new ContaBancaria("12345678");
+            conta.depositar(100);
+            conta.sacar(100);
+            assertEquals(0, conta.getSaldo());
+    }
+
+    @Test
     void saqueMenorQueZero() {
         try {
-            ContaBancaria conta = new ContaBancaria();
+            ContaBancaria conta = new ContaBancaria("12345678");
             conta.sacar(-1);
             fail();
         }
@@ -33,7 +41,7 @@ public class ContaBancariaTest {
     @Test
     void depositoMenorQueZero() {
         try {
-            ContaBancaria conta = new ContaBancaria();
+            ContaBancaria conta = new ContaBancaria("12345678");
             conta.depositar(-1);
             fail();
         }
@@ -44,7 +52,7 @@ public class ContaBancariaTest {
 
     @Test
     void deveSomarDeposito(){
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaBancaria("12345678");
         conta.depositar(100);
         conta.depositar(90);
         assertEquals(190, conta.getSaldo());
@@ -52,7 +60,7 @@ public class ContaBancariaTest {
 
     @Test
     void deveRetirarSaque(){
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaBancaria("12345678");
         conta.depositar(100);
         conta.sacar(90);
         assertEquals(10, conta.getSaldo());
@@ -60,7 +68,7 @@ public class ContaBancariaTest {
 
     @Test
     void deveTerOitoDigitos(){
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaBancaria("12345678");
         conta.setNumero_conta("12345678");
         assertEquals("12345678", conta.getNumero_conta());
     }
@@ -68,7 +76,7 @@ public class ContaBancariaTest {
     @Test
     void tentaNoveDigitos(){
         try{
-            ContaBancaria conta = new ContaBancaria();
+            ContaBancaria conta = new ContaBancaria("12345678");
             conta.setNumero_conta("123456789");
             fail();
         }
@@ -80,7 +88,7 @@ public class ContaBancariaTest {
     @Test
     void tentaSeteDigitos() {
         try{
-            ContaBancaria conta = new ContaBancaria();
+            ContaBancaria conta = new ContaBancaria("12345678");
             conta.setNumero_conta("1234567");
             fail();
         }

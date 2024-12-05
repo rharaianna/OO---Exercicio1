@@ -4,8 +4,9 @@ public class ContaBancaria {
     private String numero_conta;
     private double saldo;
 
-    public ContaBancaria () {
+    public ContaBancaria (String numero_conta) {
         this.saldo = 0;
+        this.setNumero_conta(numero_conta);
     }
 
     public String getTitular() {
@@ -36,9 +37,7 @@ public class ContaBancaria {
         if (valor < 0){
             throw new IllegalArgumentException("Valor de depósito não pode ser negativo");
         }
-        else {
-            this.saldo += valor;
-        }
+        this.saldo += valor;
     }
     public void sacar (double valor) {
         if (valor >= 0){
